@@ -4,7 +4,7 @@
 using namespace std;
 
 int arr[100001];
-int seg[400001];
+int seg[300001];
 
 
 int go(int n, int s, int e) {
