@@ -1,11 +1,10 @@
 #include <iostream>
-
 using namespace std;
 
-long long int arr[1000001];
-long long int t[4000001];
+int arr[100001];
+int t[400001];
 
-long long int init(int n, int s, int e) {
+int init(int n, int s, int e) {
 	if (s == e) {
 		return t[n] = arr[s];
 	}
@@ -14,21 +13,14 @@ long long int init(int n, int s, int e) {
 	}
 }
 
-long long int sum(int n, int s, int e,int l,int r) {
-	if (r < s || l > e) return 0;
-	if (l <= s && e <= r) return t[n];
-
-	return sum(n*2, s, (s + e) / 2, l, r) + sum(n*2+1, (s + e) / 2 + 1, e, l, r);
-}
-
-long long int mul(int n, int s, int e, int l, int r) {
+int mul(int n, int s, int e, int l, int r) {
 	if (r < s || l > e) return 1;
 	if (l <= s && e <= r) return t[n];
 
 	return mul(n * 2, s, (s + e) / 2, l, r) * mul(n * 2 + 1, (s + e) / 2 + 1, e, l, r);
 }
 
-long long int modify(int n,int s,int e, int i, long long int diff) {
+int modify(int n,int s,int e, int i, long long int diff) {
 	
 	if (i < s || e < i) return t[n];
 	if (s == e) {
@@ -54,7 +46,7 @@ int main() {
 		}
 		init(1, 0, n - 1);
 		char a;
-		long long int b, c;
+        int b, c;
 		for (int i = 0; i < m; i++) {
 			cin >> a >> b >> c;
 			if (a == 'P') {
