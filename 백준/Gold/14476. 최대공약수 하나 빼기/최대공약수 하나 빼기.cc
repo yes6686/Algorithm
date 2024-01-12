@@ -2,13 +2,11 @@
 #include <algorithm>
 using namespace std;
 
-int arr[1000001];
+int arr[10000001];
 
 int gcd(int a, int b) { return b ? gcd(b, a % b) : a; }
 
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
 	int n;
 	cin >> n;
 	for (int i = 0; i < n; i++) {
@@ -39,18 +37,17 @@ int main() {
 		}
 	}
 	if (check == 1 && x != 1) {
-		cout << x << ' ' << arr[index]<<'\n';
+		cout << x << ' ' << arr[index] << '\n';
 		return 0;
 	}
-	//cout << x << '\n';
 	for (int i = 0; i < n; i++) {
 		arr[i] /= x;
 	}
 	int a = gcd(arr[0],arr[1]);
 	int b = gcd(arr[1],arr[2]);
 	int c = gcd(arr[2],arr[3]);
-	int aCnt = 0, bCnt = 0,cCnt=0;
-	int aIndex = -1, bIndex = -1, cIndex;
+	int aCnt = 0, bCnt = 0, cCnt = 0;
+	int aIndex = -1, bIndex = -1, cIndex = -1;
 	int ans = -1;
 	for (int i = 0; i < n; i++) {
 		if (arr[i] % a == 0) {
