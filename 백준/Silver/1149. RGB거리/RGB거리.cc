@@ -1,27 +1,37 @@
 #include <iostream>
 using namespace std;
-int arr[3][1001];
+
+int arr[1001][3];
+int dp[1001][3];
 
 int main() {
 	int n;
 	cin >> n;
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < 3; j++) {
-			cin >> arr[j][i];
+			cin >> arr[i][j];
 		}
 	}
-	
-	for (int i = 1; i < n; i++) {
-		arr[0][i] += min(arr[1][i-1], arr[2][i-1]);
-		arr[1][i] += min(arr[0][i-1], arr[2][i-1]);
-		arr[2][i] += min(arr[0][i-1], arr[1][i-1]);
-
-	}
-	int min = 1000001;
-	for (int i = 0; i < 3; i++) {
-		if (min > arr[i][n-1]) {
-			min = arr[i][n-1];
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < 3; j++) {
+			if (i == 0) {
+				dp[i][j] = arr[i][j];
+			}
+			else {
+				if (j == 0) {
+					dp[i][j] = min(arr[i][j] + dp[i - 1][j + 1],
+						arr[i][j] + dp[i - 1][j + 2]);
+				}
+				else if (j == 1) {
+					dp[i][j] = min(arr[i][j] + dp[i - 1][j - 1],
+						arr[i][j] + dp[i - 1][j + 1]);
+				}
+				else {
+					dp[i][j] = min(arr[i][j] + dp[i - 1][j - 1],
+						arr[i][j] + dp[i - 1][j - 2]);
+				}
+			}
 		}
 	}
-	cout << min;
+	cout << min(min(dp[n - 1][0], dp[n - 1][1]), dp[n - 1][2]);
 }
