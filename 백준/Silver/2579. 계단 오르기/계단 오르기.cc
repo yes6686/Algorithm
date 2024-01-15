@@ -1,27 +1,19 @@
 #include <iostream>
 using namespace std;
+
 int arr[301];
-int st[301];
-
-int dp(int n){
-	if (n < 0) return 0;
-	if (n == 1) return arr[n] = st[n];
-	if (n == 2) return arr[n] = st[n] + st[n - 1];
-	if (arr[n] != 0) return arr[n];
-	else {
-		return arr[n] = max(st[n - 1] +dp(n-3),
-			dp(n-2))+st[n];
-	}
-
-}
+int dp[301];
 
 int main() {
-
 	int n;
 	cin >> n;
-	for (int i = 1; i <= n; i++) {
-		cin >> st[i];
+	for (int i = 1; i <= n; i++) cin >> arr[i];
+	dp[0] = 0;
+	dp[1] = arr[1];
+	dp[2] = arr[1]+arr[2];
+	for (int i = 3; i <= n; i++) {
+		dp[i] = max(arr[i] + arr[i - 1] + dp[i - 3],
+			arr[i] + dp[i - 2]);
 	}
-	cout << dp(n);
-
+	cout << dp[n];
 }
