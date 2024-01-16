@@ -1,22 +1,22 @@
 #include <iostream>
 using namespace std;
+
 int arr[100001];
-int dp[100001];
+int sum[100001];
+
 int main() {
-	ios_base::sync_with_stdio(false);
+	ios::sync_with_stdio(false);
 	cin.tie(NULL);
-	int n, m;
-	cin >> n >> m;
-	for (int i = 0; i < n; i++) {
+	int n ,m;
+	cin >> n >>m;
+	sum[0] = arr[0];
+	for (int i = 1; i <= n; i++) {
 		cin >> arr[i];
+		sum[i] = arr[i] + sum[i - 1];
 	}
-	dp[0] = arr[0];
-	for (int i = 1; i < n; i++) {
-		dp[i] += (dp[i - 1]+arr[i]);
-	}
-	int a, b;
-	for (int i = 0; i < m; i++) {
-		cin >> a >> b;
-		cout << dp[b-1] - dp[a-2] << '\n';
-	}
+	int i, j;
+	while (m--) {
+		cin >> i >> j;
+		cout << sum[j] - sum[i-1]<<'\n';
+	}	
 }
