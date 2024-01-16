@@ -9,7 +9,6 @@ int main() {
 	cin.tie(NULL);
 	int n ,m;
 	cin >> n >>m;
-	sum[0] = arr[0];
 	for (int i = 1; i <= n; i++) {
 		cin >> arr[i];
 		sum[i] = arr[i] + sum[i - 1];
