@@ -2,11 +2,8 @@
 using namespace std;
 
 int arr[100001];
-int arr1[100001];
-int arr2[100001];
 int sum1[100001];
 int sum2[100001];
-int nArr[100001];
 
 
 int main() {
@@ -29,16 +26,12 @@ int main() {
 			if (check) {
 				check = 0;
 				sum1[i] = 3 * arr[i] + sum1[i - 1];
-				arr1[i] = 3 * arr[i];
 				sum2[i] = sum2[i - 1] - arr[i];
-				arr2[i] = arr[i] * (-1);
 			}
 			else {
 				check = 1;
 				sum1[i] = sum1[i - 1] - arr[i];
-				arr1[i] = arr[i] * (-1);
 				sum2[i] = 3 * arr[i] + sum2[i - 1];
-				arr2[i] = 3 * arr[i];
 			}
 		}
 		else {
@@ -61,7 +54,7 @@ int main() {
 			cout << 0 << '\n';
 		}
 		else {
-			if (arr1[firstP]>0) {
+			if (sum1[firstP] - sum1[firstP-1]>0) {
 				cout << sum1[b] - sum1[a-1]<<'\n';
 			}
 			else {
