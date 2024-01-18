@@ -42,14 +42,9 @@ int main() {
 			st1.push(x);
 		}
 	}
-	stack<char>a;
 	while (!st1.empty()) {
-		a.push(st1.top());
+		st2.push(st1.top());
 		st1.pop();
-	}
-	while (!a.empty()) {
-		cout << a.top();
-		a.pop();
 	}
 	while (!st2.empty()) {
 		cout << st2.top();
