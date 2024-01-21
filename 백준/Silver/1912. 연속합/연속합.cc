@@ -2,7 +2,6 @@
 using namespace std;
 
 int arr[100001];
-int dp[100001];
 
 int main() {
 	ios::sync_with_stdio(false);
