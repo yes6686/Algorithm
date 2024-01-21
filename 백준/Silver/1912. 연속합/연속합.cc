@@ -5,6 +5,8 @@ int arr[100001];
 int dp[100001];
 
 int main() {
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
 	int n;
 	cin >> n;
 	int isAllNegative = 1;
@@ -26,10 +28,10 @@ int main() {
 			maxAns = max(maxAns, sumGoing);
 		}
 		sumGoing += arr[i];
-		maxAns = max(maxAns, sumGoing);
 		if (sumGoing < 0) {
 			sumGoing = 0;
 		}
+		maxAns = max(maxAns, sumGoing);
 	}
 	cout << maxAns;
 }
