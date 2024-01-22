@@ -28,6 +28,5 @@ int main() {
 	cin.tie(NULL);
 	ll n;
 	cin >> n;
-	ll k = n / 2;
-	cout << f(2 * k + 1) - 1;
+	cout << f((n/2)*2 + 1) - 1;
 }
