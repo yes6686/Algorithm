@@ -3,9 +3,7 @@
 using namespace std;
 
 int arr[21];
-int visited[21];
 int n, s;
-
 int ans = 0;
 
 void solve(int depth, int a) {
@@ -13,7 +11,6 @@ void solve(int depth, int a) {
 		ans++;
 	}
 	if (depth >= n) return;
-	if (arr[depth] > 0 && a > s) return;
 	for (int i = depth+1; i <= n; i++) {
 		solve(i, a + arr[i-1]);
 	}
@@ -28,5 +25,4 @@ int main() {
 	sort(arr, arr + n);
 	solve(0, 0);
 	cout << ans;
-
 }
