@@ -6,13 +6,10 @@ int n, s;
 int ans = 0;
 
 void solve(int depth, int a) {
-	if (a == s && depth) {
-		ans++;
-	}
-	if (depth >= n) return;
-	for (int i = depth+1; i <= n; i++) {
-		solve(i, a + arr[i-1]);
-	}
+	if (depth == n) return;
+	if (a + arr[depth] == s) ans++;
+	solve(depth + 1, a + arr[depth]);
+	solve(depth + 1, a );
 }
 int main() {
 	ios::sync_with_stdio(false);
