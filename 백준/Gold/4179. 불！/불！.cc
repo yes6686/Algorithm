@@ -60,8 +60,6 @@ void Jbfs(int a, int b) {
 }
 
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
 	cin >> r >> c;
 	char ch;
 	int Jindexi,Jindexj;
@@ -76,10 +74,9 @@ int main() {
 			}
 			else if (ch == 'J') {
 				arr[i][j] = 3;
-				Jindexi = i;
-				Jindexj = j;
+				Jindexi = i; Jindexj = j;
 			}
-			else {
+			else if(ch=='F') {
 				arr[i][j] = 4;
 			}
 		}
@@ -96,15 +93,12 @@ int main() {
 	int mi = 1000001;
 	for (int i = 0; i < r; i++) {
 		for (int j = 0; j < c; j++) {
-			if (arr[i][j] == 2) {
-				if (J[i][j] != 0) {
-					if(i==0 || j==0 || i==r-1 || j==c-1)
-						mi = min(mi, J[i][j]);
-				}
+			if (i != 0 && j != 0 && i != r - 1 && j != c - 1) continue;
+			if (arr[i][j] == 2 && J[i][j]) {
+				mi = min(mi, J[i][j]);	
 			}
-			else if (arr[i][j] == 3) {
-				if (i == 0 || j == 0 || i == r - 1 || j == c - 1)
-					mi = 0;
+			else if (arr[i][j] == 3) { // 가장자리에 J가 있는 경우
+				mi = 0;
 			}
 		}
 	}
