@@ -1,11 +1,9 @@
 #include <iostream>
 #include <queue>
-#include <vector>
 #define INF 1e9
 using namespace std;
 
 priority_queue<pair<pair<int,int>,int>, vector<pair<pair<int, int>, int>>, greater<pair<pair<int, int>, int>>> pq;
-vector<pair<int, int>>v[126];
 
 int dx[4] = { 0,0,1,-1 };
 int dy[4] = { 1,-1,0,0 };
@@ -34,8 +32,6 @@ void djk(int a,int b,int n) {
 }
 
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
 	int T = 1;
 	while (1) {
 		int n;
