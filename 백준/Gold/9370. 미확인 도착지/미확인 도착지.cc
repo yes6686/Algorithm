@@ -4,12 +4,12 @@
 #define INF 1e9
 using namespace std;
 
-vector<pair<int, int>>v[2001];
 int dis_s[2001];
 int dis_h[2001];
 int dis_g[2001];
 priority_queue<int,vector<int>,greater<int>>desCandidateQ;
 priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>>pq;
+vector<pair<int, int>>v[2001];
 
 void djk(int x,int dis[2001]) {
 	for (int i = 1; i <= 2000; i++) {
@@ -31,7 +31,6 @@ void djk(int x,int dis[2001]) {
 		}
 	}
 }
-int ans[2001];
 
 int main() {
 	ios::sync_with_stdio(false);
@@ -67,8 +66,7 @@ int main() {
 			if ((dis_s[k] == dis_s[g] + GHlen + dis_h[k]) ||
 				(dis_s[k] == dis_s[h] + GHlen + dis_g[k])) {
 				cout << k << ' ';
-			}
-			
+			}	
 		}
 		for (int i = 1; i <= n; i++) {
 			v[i].clear();
