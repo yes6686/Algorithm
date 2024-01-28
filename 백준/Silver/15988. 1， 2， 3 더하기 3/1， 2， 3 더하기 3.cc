@@ -15,8 +15,7 @@ int main() {
 	dp[2] = 2;
 	dp[3] = 4;
 	for (int i = 4; i <=MAX ; i++) {
-		dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3];
-		dp[i] %= MOD;
+		dp[i] = (dp[i - 1] + dp[i - 2] + dp[i - 3])%MOD;
 	}
 	while (T--) {
 		cin >> n;
