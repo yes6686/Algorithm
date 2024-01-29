@@ -4,8 +4,6 @@ using namespace std;
 
 queue<int>q;
 queue<int>qq;
-queue<int>q1;
-queue<int>q2;
 
 int main() {
 	int k;
@@ -33,42 +31,20 @@ int main() {
 	}
 	int preV = q.front();
 	q.pop();
-	int check = 0;
+	int di = 1;
 	while (!q.empty()) {
 		int currV = q.front();
 		q.pop();
 		if ((preV == maxW && currV == maxH) ||
 			(preV == maxH && currV == maxW)) {
-			while (!q.empty()) {
-				currV = q.front();
-				q2.push(currV);
+			q.pop();
+			for (int i = 0; i < 2; i++) {
+				di *= q.front();
 				q.pop();
 			}
 			break;
 		}
-		q1.push(preV);
 		preV = currV;
 	}
-	int ans = 1;
-	int cnt = 0;
-	int multcheck = 0;
-	while (!q2.empty()) {
-		int k = q2.front();
-		q2.pop();
-		if (cnt == 1 || cnt == 2) {
-			ans *= k;
-		}
-		cnt++;
-	}
-	while (!q1.empty()) {
-		int k = q1.front();
-		q1.pop();
-		if (cnt == 1 || cnt == 2) {
-			ans *= k;
-		}
-		cnt++;
-	}
-	ans = maxH * maxW - ans;
-	ans *= k;
-	cout << ans;
+	cout << k * (maxH * maxW - di);
 }
