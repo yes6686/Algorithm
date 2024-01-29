@@ -1,9 +1,8 @@
 #include <iostream>
-#include <queue>
 using namespace std;
 
-queue<int>q;
-queue<int>qq;
+int arr1[7];
+int arr2[7];
 
 int main() {
 	int k;
@@ -15,8 +14,8 @@ int main() {
 
 	for (int i = 0; i < 6; i++) {
 		cin >> c >> dis;
-		q.push(dis);
-		qq.push(dis);
+		arr1[i] = dis;
+		arr2[i] = dis;
 		if (c == 1 || c == 2) {
 			maxW = max(maxW, dis);
 		}
@@ -24,27 +23,29 @@ int main() {
 			maxH = max(maxH, dis);
 		}
 	}
-	while (!qq.empty()) {
-		int k = qq.front();
-		qq.pop();
-		q.push(k);
-	}
-	int preV = q.front();
-	q.pop();
+	int preV = arr1[0];
+	int check = 0;
 	int di = 1;
-	while (!q.empty()) {
-		int currV = q.front();
-		q.pop();
-		if ((preV == maxW && currV == maxH) ||
-			(preV == maxH && currV == maxW)) {
-			q.pop();
-			for (int i = 0; i < 2; i++) {
-				di *= q.front();
-				q.pop();
-			}
-			break;
+	int cnt = 0;
+	for (int i = 1; i < 12; i++) {
+		int curV;
+		if (i < 6) {
+			curV = arr1[i];
 		}
-		preV = currV;
+		else {
+			curV = arr2[i-6];
+		}
+		if (check) {
+			if (cnt) {
+				di *= curV;
+			}
+			cnt++;
+		}
+		if ((preV == maxW && curV == maxH) || (preV == maxH && curV == maxW)) {
+			check = 1;
+		}
+		if (cnt == 3) break;
+		preV = curV;
 	}
-	cout << k * (maxH * maxW - di);
+	cout << k * (maxH * maxW - di);	
 }
