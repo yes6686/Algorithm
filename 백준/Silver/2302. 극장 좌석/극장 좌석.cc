@@ -1,8 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int dp[41][2]; // dp[][0] : 왼쪽  , dp[][1] : 가만히
-int vip[41];
+long long int dp[41]; 
 
 int main() {
 	ios::sync_with_stdio(false);
@@ -11,34 +10,29 @@ int main() {
 	cin >> n;
 	int m;
 	cin >> m;
+
+	if (n == m) { // 모든 좌석이 VIP~
+		cout << 1;
+		return 0;
+	}
+
 	int x;
-	for (int i = 0; i < m; i++) {
-		cin >> x;
-		vip[x] = 1;
-	}
-	dp[1][0] = 0;
-	dp[1][1] = 1;
-	if (vip[1] == 1 || vip[2]==1) {
-		dp[2][0] = 0;
-	}
-	else {
-		dp[2][0] = 1;
-	}
-	dp[2][1] = 1;
+	dp[0] = 1; // 아래에서 설명
+	dp[1] = 1;
+	dp[2] = 2;
 	for (int i = 3; i <= n; i++) {
-		if (vip[i] == 1) {
-			dp[i][0] = 0;
-			dp[i][1] = dp[i - 1][0] + dp[i - 1][1];
-		}
-		else {
-			if (vip[i - 1] == 1) {
-				dp[i][0] = 0;
-			}
-			else {
-				dp[i][0] = dp[i - 2][0] + dp[i - 2][1];
-			}
-			dp[i][1] = dp[i - 1][0] + dp[i - 1][1];
-		}
+		dp[i] = dp[i - 1] + dp[i - 2];
 	}
-	cout << dp[n][0] + dp[n][1];
+
+	int ans = 1; //방법의 가짓수는 2,000,000,000을 넘지 않기에 int형 사용
+	int preVipPosition = 0; // 전에 나온 vip 위치
+
+	for (int i = 0; i < m; i++) { //고정석의 번호가 작은 수부터 큰 수의 순서로 한 줄에 하나씩 입력되므로
+		cin >> x;
+		ans *= dp[x - 1 - preVipPosition]; 
+		// *만약  vip가 연속으로 나올 시 dp[0]이 곱해질 수 있으므로 dp[0]=1로 해줘야함
+		preVipPosition = x;
+	}
+	ans *= dp[n - preVipPosition];
+	cout << ans;	
 }
