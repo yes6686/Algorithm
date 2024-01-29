@@ -16,7 +16,6 @@ int main() {
 		cin >> x;
 		vip[x] = 1;
 	}
-
 	dp[1][0] = 0;
 	dp[1][1] = 1;
 	if (vip[1] == 1 || vip[2]==1) {
@@ -26,8 +25,6 @@ int main() {
 		dp[2][0] = 1;
 	}
 	dp[2][1] = 1;
-
-	int ans = 0;
 	for (int i = 3; i <= n; i++) {
 		if (vip[i] == 1) {
 			dp[i][0] = 0;
