@@ -1,14 +1,10 @@
 #include <iostream>
-#include <algorithm>
 #include <queue>
-#include <vector>
 using namespace std;
 
-vector<pair<int,int>>v[10001];
 priority_queue<pair<int, pair<int, int>>, 
 	vector<pair<int, pair<int, int>>>, 
 	greater<pair<int, pair<int, int>>>>pq;
-
 
 int parent[10001];
 
@@ -31,23 +27,9 @@ int findParent(int a, int b) {
 	else return 0;
 }
 
-int ans = 0;
-
-void kru() {
-	while (!pq.empty()) {
-		int cost = pq.top().first;
-		int a = pq.top().second.first;
-		int b = pq.top().second.second;
-		pq.pop();
-		if (!findParent(a, b)) {
-			unionParent(a, b);
-			ans += cost;
-		}
-
-	}
-}
-
 int main() {
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
 	int V, E;
 	cin >> V >> E;
 	int A, B, C;
@@ -58,6 +40,16 @@ int main() {
 		cin >> A >> B >> C;
 		pq.push({ C,{A,B} });
 	}
-	kru();
+	int ans = 0;
+	while (!pq.empty()) {
+		int cost = pq.top().first;
+		int a = pq.top().second.first;
+		int b = pq.top().second.second;
+		pq.pop();
+		if (!findParent(a, b)) {
+			unionParent(a, b);
+			ans += cost;
+		}
+	}
 	cout << ans;
 }
