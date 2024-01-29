@@ -57,7 +57,6 @@ int main() {
 	for (int i = 0; i < E; i++) {
 		cin >> A >> B >> C;
 		pq.push({ C,{A,B} });
-		pq.push({ C,{B,A} });
 	}
 	kru();
 	cout << ans;
