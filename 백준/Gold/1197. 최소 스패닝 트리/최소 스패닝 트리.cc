@@ -1,17 +1,16 @@
-#include <iostream>	
+#include <iostream>
 #include <algorithm>
+#include <queue>
+#include <vector>
 using namespace std;
 
+vector<pair<int,int>>v[10001];
+priority_queue<pair<int, pair<int, int>>, 
+	vector<pair<int, pair<int, int>>>, 
+	greater<pair<int, pair<int, int>>>>pq;
+
+
 int parent[10001];
-int cc[10001];
-struct con {
-	int a;
-	int b;
-	int c;
-};
-bool compare(con w, con h) {
-	return w.c < h.c;
-}
 
 int getParent(int x) {
 	if (parent[x] == x) return x;
@@ -32,39 +31,34 @@ int findParent(int a, int b) {
 	else return 0;
 }
 
-int main() {
+int ans = 0;
 
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-
-	con s[100001];
-	int v, e;
-	cin >> v >> e;
-	for (int i = 1; i <= v; i++) {
-		parent[i] = i;
-	}
-	for (int i = 0; i < e; i++) {
-		cin >> s[i].a >> s[i].b >> s[i].c;
-		
-	}
-	
-	sort(s, s + e,compare);
-	int sum = 0;
-	for (int i = 0; i < e; i++) {
-		if (cc[s[i].a] == 1 && cc[s[i].b] == 1 && findParent(s[i].a, s[i].b) == 1) {
-			continue;
+void kru() {
+	while (!pq.empty()) {
+		int cost = pq.top().first;
+		int a = pq.top().second.first;
+		int b = pq.top().second.second;
+		pq.pop();
+		if (!findParent(a, b)) {
+			unionParent(a, b);
+			ans += cost;
 		}
-		unionParent(s[i].a, s[i].b);
-		cc[s[i].a] = 1;
-		cc[s[i].b] = 1;
-		sum += s[i].c;
+
 	}
-	cout << sum << '\n';
+}
 
+int main() {
+	int V, E;
+	cin >> V >> E;
+	int A, B, C;
 
-
-
-
-
-
+	for (int i = 1; i <= V; i++) parent[i] = i;
+	
+	for (int i = 0; i < E; i++) {
+		cin >> A >> B >> C;
+		pq.push({ C,{A,B} });
+		pq.push({ C,{B,A} });
+	}
+	kru();
+	cout << ans;
 }
