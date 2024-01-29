@@ -2,7 +2,7 @@
 #include <queue>
 using namespace std;
 
-queue<pair<int, int>>q;
+queue<int>q;
 queue<int>qq;
 queue<int>q1;
 queue<int>q2;
@@ -17,7 +17,7 @@ int main() {
 
 	for (int i = 0; i < 6; i++) {
 		cin >> c >> dis;
-		q.push({ c,dis });
+		q.push(dis);
 		qq.push(dis);
 		if (c == 1 || c == 2) {
 			maxW = max(maxW, dis);
@@ -29,18 +29,18 @@ int main() {
 	while (!qq.empty()) {
 		int k = qq.front();
 		qq.pop();
-		q.push({1,k});
+		q.push(k);
 	}
-	int preV = q.front().second;
+	int preV = q.front();
 	q.pop();
 	int check = 0;
 	while (!q.empty()) {
-		int currV = q.front().second;
+		int currV = q.front();
 		q.pop();
 		if ((preV == maxW && currV == maxH) ||
 			(preV == maxH && currV == maxW)) {
 			while (!q.empty()) {
-				currV = q.front().second;
+				currV = q.front();
 				q2.push(currV);
 				q.pop();
 			}
@@ -71,5 +71,4 @@ int main() {
 	ans = maxH * maxW - ans;
 	ans *= k;
 	cout << ans;
-	//ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
 }
