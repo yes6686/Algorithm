@@ -5,6 +5,8 @@ int arr[3][100001];
 int dp[3][100001][3];
 
 int main() {
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
 	int T;
 	cin >> T;
 	while (T--) {
