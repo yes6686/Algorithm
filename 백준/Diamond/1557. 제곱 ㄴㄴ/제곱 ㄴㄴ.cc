@@ -20,9 +20,11 @@ int main() {
 	for (int i = 1; i < 150001; i++) {
 		if (arr[i]) parr[s++] = arr[i]*arr[i];
 	}
+	
 	long long int reCnt = 0;
 	int pretotalReCnt = 0;
 	int curN = n;
+	
 	while (1) {
 		reCnt = 0;
 		for (int i1 = 0; parr[i1] <= curN; i1++) {
