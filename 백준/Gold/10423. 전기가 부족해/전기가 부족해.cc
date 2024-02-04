@@ -3,9 +3,9 @@
 using namespace std;
 
 int parent[1001];
-
 int c[1001];
 int cc[1001];
+
 struct edge {
 	int u, v;
 	int cost;
