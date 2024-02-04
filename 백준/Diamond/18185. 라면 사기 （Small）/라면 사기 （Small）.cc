@@ -23,7 +23,6 @@ int main() {
 				ans += mincnt * 5;
 				arr[i - 2] -= mincnt;
 				arr[i - 1] -= mincnt;
-
 			}
 			else {
 				int mincnt = min(arr[i - 2],arr[i-1]-arr[i]);
@@ -51,7 +50,6 @@ int main() {
 		if (arr[i]) {
 			ans += arr[i] * 3;
 		}
-
 	}
 	cout << ans;
 }
