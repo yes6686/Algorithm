@@ -3,7 +3,6 @@ using namespace std;
 
 long long int arr[1000001];
 
-
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);
@@ -22,9 +21,6 @@ int main() {
 		ans += arr[i]*b;
 	}
 	else {
-
-
-
 		for (int i = 3; i <= n; i++) {
 			if (arr[i - 2] && arr[i - 1] && arr[i]) {
 				if (arr[i - 1] <= arr[i]) {
