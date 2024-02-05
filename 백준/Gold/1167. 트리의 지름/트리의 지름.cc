@@ -3,9 +3,6 @@
 using namespace std;
 
 vector<pair<int, int>>v[100001];
-int visited[100001];
-int edgeCnt[100001];
-
 int ans = 0;
 int ve = 0;
 
@@ -24,8 +21,6 @@ void dfs(int x, int d, int p) {
 }
 
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
 	int n;
 	cin >> n;
 	int x;
@@ -39,12 +34,9 @@ int main() {
 				cin >> cost;
 			}
 			v[x].push_back({ cost,y });
-			edgeCnt[y]++;
 		}
 	}
 	dfs(1, 0, 1);
-	
 	dfs(ve, 0, ve);
-	
 	cout << ans;
 }
