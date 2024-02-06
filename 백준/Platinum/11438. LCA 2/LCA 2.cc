@@ -4,15 +4,13 @@
 using namespace std;
 
 vector<int>v[100001];
-int height[100001];
 int parent[100001][18];
-
+int level[100001];
 int maxL;
-
-void dfs(int x, int depth, int p) {
-	height[x] = depth;
+void dfs(int x,int depth,int p) {
+	level[x] = depth;
 	parent[x][0] = p;
-
+	
 	for (int i = 1; i <= maxL; i++) {
 		parent[x][i] = parent[parent[x][i - 1]][i - 1];
 	}
@@ -24,30 +22,24 @@ void dfs(int x, int depth, int p) {
 	}
 }
 
-int lca(int a, int b) {
-
+int lca(int a,int b) {
 	if (a == 1 || b == 1) return 1;
 
-	if (height[a] > height[b]) {
+	if (level[a] < level[b]) {
+		int temp = a;
+		a = b;
+		b = temp;
+	}
+	if (level[a] != level[b]) {
 		for (int i = maxL; i >= 0; i--) {
-			if (height[parent[a][i]] >= height[b]) {
+			if (level[parent[a][i]] >= level[b]) {
 				a = parent[a][i];
 			}
 		}
 	}
-	else if (height[a] < height[b]) {
-		for (int i = maxL; i >= 0; i--) {
-			if (height[parent[b][i]] >= height[a]) {
-				b = parent[b][i];
-			}
-		}
-	}
-
-	int r=a;
-
+	int r = a;
 	if (a != b) {
-
-		for (int i = maxL; i >= 0; i--) {
+		for (int i = maxL; i >=0; i--) {
 			if (parent[a][i] != parent[b][i]) {
 				a = parent[a][i];
 				b = parent[b][i];
@@ -57,7 +49,9 @@ int lca(int a, int b) {
 			}
 		}
 	}
+	
 	return r;
+	
 }
 
 int main() {
@@ -66,18 +60,18 @@ int main() {
 	maxL = (int)floor(log2(100001));
 	int n;
 	cin >> n;
-	int a, b;
 	for (int i = 0; i < n - 1; i++) {
-		cin >> a >> b;
-		v[a].push_back(b);
-		v[b].push_back(a);
+		int x, y;
+		cin >> x >> y;
+		v[x].push_back(y);
+		v[y].push_back(x);
 	}
 	dfs(1, 0, 0);
 	int m;
 	cin >> m;
-	int x, y;
 	for (int i = 0; i < m; i++) {
-		cin >> x >> y;
-		cout << lca(x, y) << '\n';
+		int a, b;
+		cin >> a >> b;
+		cout << lca(a, b) << '\n';
 	}
 }
