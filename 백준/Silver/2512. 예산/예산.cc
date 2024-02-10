@@ -3,38 +3,48 @@
 using namespace std;
 
 int arr[10001];
-int s[10001];
 
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 	int n;
 	cin >> n;
-	for (int i = 1; i <= n; i++) {
+	int sum = 0;
+	for (int i = 0; i < n; i++) {
 		cin >> arr[i];
+		sum += arr[i];
 		
 	}
 	int m;
-	cin >> m;
-	sort(arr, arr + n+1); 
-	for (int i = 1; i <= n; i++) {
-		s[i] = arr[i] + s[i - 1];
-	}
-	int ans;
-	for (int i = 1; i <= n; i++) {
-		if (s[i - 1] + ((n - i + 1) * arr[i]) > m) {
-			for (int j = arr[i - 1] + 1; j < arr[i]; j++) {
-				if (s[i - 1] + ((n - i + 1) * j) > m) {
-					break;
-				}
-				else {
-					ans = j;
-				}
+	cin >> m; 
+	
+	sort(arr, arr + n);
+
+	if (sum <= m) {
+		cout << arr[n - 1]<<'\n';
+		return 0;
+	}	
+
+	int s = 0;
+	int e = arr[n-1];
+	int ans=0;
+	while (s <= e) {
+		sum = 0;
+		int mid = (s + e) / 2;
+		for (int i = 0; i < n; i++) {
+			if (arr[i] <= mid) {
+				sum += arr[i];
 			}
-			break;
+			else {
+				sum += mid;
+			}
+		}
+		if (sum > m) {
+			e = mid - 1;
 		}
 		else {
-			ans = arr[i];
+			s = mid + 1;
+			ans = max(ans, mid);
 		}
 	}
 	cout << ans;
