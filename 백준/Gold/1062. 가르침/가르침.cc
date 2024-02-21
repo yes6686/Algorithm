@@ -1,18 +1,26 @@
 #include <iostream>
 using namespace std;
 
-int barr[51];
+string s[51];
+int alpa[27]; // a~z 1~26
+int ch[27];
 
-int n, k;
-int visited[27];
+int N,K;
 int maxAns = 0;
 
-void bfs(int x, int d,int bi) {
+void bfs(int x,int d) {
 
-	if (d >=k) {
+	if (d >= K) {
 		int cnt = 0;
-		for (int i = 0; i < n; i++) {
-			if ((barr[i] & bi) == barr[i]) {
+		for (int i = 0; i < N; i++) {
+			int check = 1;
+			for (int j = 4; j < s[i].size()-4; j++) {
+				if (alpa[s[i][j] - 'a' + 1] == 0) {
+					check = 0;
+					break;
+				}
+			}
+			if (check == 1) {
 				cnt++;
 			}
 		}
@@ -21,11 +29,10 @@ void bfs(int x, int d,int bi) {
 	}
 
 	for (int i = x; i <= 26; i++) {
-		
-		if (visited[i] == 0) {
-			visited[i] = 1;
-			bfs(i,d + 1, (bi | (1<<(i-1))));
-			visited[i] = 0;
+		if (alpa[i] == 0 ) {
+			alpa[i] = 1;
+			bfs(i, d + 1);
+			alpa[i] = 0;
 		}
 	}
 }
@@ -33,31 +40,24 @@ void bfs(int x, int d,int bi) {
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
-	cin >> n >> k;
-
-	for (int i = 0; i < n; i++) {
-		string s;
-		cin >> s;
-		for (int j = 0; j < s.size(); j++) {
-			barr[i] = (barr[i] | (1 << s[j] - 'a'));
+	cin >> N >> K;
+	for (int i = 0; i < N; i++) {
+		cin >> s[i];
+		for (int j = 0; j < s[i].size(); j++) {
+			ch[s[i][j] - 'a' + 1] = 1;
 		}
 	}
-	if (k < 5) {
-		cout << 0;
-		return 0;
-	}
-	char a = 'a'; char N = 'n'; char t = 't';	char i = 'i';	char c = 'c';
-	visited[a - 'a' + 1] = 1;
-	visited[N - 'a' + 1] = 1;
-	visited[t - 'a' + 1] = 1;
-	visited[i - 'a' + 1] = 1;
-	visited[c - 'a' + 1] = 1;
-	int cc = 0;
-	cc = (cc | 1 << (a - 'a'));
-	cc = (cc | 1 << (N - 'a'));
-	cc = (cc | 1 << (t - 'a'));
-	cc = (cc | 1 << (i - 'a'));
-	cc = (cc | 1 << (c - 'a'));
-	bfs(1,5, cc);
+    if(K<5){
+        cout<<0;
+        return 0;
+    }
+	char a = 'a'; char n = 'n'; char t = 't';	char i = 'i';	char c = 'c';
+	alpa[a - 'a' + 1] = 1;
+	alpa[n - 'a' + 1] = 1;
+	alpa[t - 'a' + 1] = 1;
+	alpa[i - 'a' + 1] = 1;
+	alpa[c - 'a' + 1] = 1;
+	bfs(1, 5);
 	cout << maxAns;
+
 }
