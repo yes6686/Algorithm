@@ -40,11 +40,7 @@ int main() {
 		v[a].push_back(b);
 		v[b].push_back(a);
 	}
-	for (int i = 1; i <= V; i++) {
-		if (visited[i] == 0) {
-			dfs(1, i, 0);
-		}
-	}
+    dfs(1,1,0);
 	cout << pq.size() << '\n';
 	while (!pq.empty()) {
 		cout << pq.top().first << ' ' << pq.top().second << '\n';
