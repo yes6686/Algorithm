@@ -5,7 +5,7 @@ using namespace std;
 
 vector<int>v[100001];
 priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>>pq;
-int visited[100001];
+int visited[1000001];
 
 int dfs(int n, int x, int pre) {
 	visited[x] = n;
