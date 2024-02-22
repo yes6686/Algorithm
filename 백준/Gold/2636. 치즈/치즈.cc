@@ -31,7 +31,7 @@ void bfs(int x, int y) {
 				q.push({ nx,ny });
 			}
 			else if(arr[nx][ny]==1) {
-				arr[nx][ny] = 2;
+				arr[nx][ny] = 0;
 				cnt++;
 			}
 		}
@@ -39,6 +39,8 @@ void bfs(int x, int y) {
 }
 
 int main() {
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
 	cin >> n >> m;
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < m; j++) {
@@ -54,11 +56,6 @@ int main() {
 			break;
 		}
 		preCnt = cnt;
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < m; j++) {
-				if (arr[i][j] == 2) arr[i][j] = 0;
-			}
-		}
 		memset(visited, 0, sizeof(visited));
 		t++;
 	}
