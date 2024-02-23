@@ -3,10 +3,7 @@
 using namespace std;
 
 queue<pair<pair<int, int>, int>>q;
-
 int n, k;
-int minAns = 1e9;
-
 int visited[500001][2];
 
 int bfs(int x, int k) {
@@ -39,6 +36,8 @@ int bfs(int x, int k) {
 }
 
 int main() {
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
 	cin >> n >> k;
 	cout<<bfs(n, k);
 }
