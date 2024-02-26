@@ -1,12 +1,3 @@
 #include <iostream>
-
 using namespace std;
-
-int main() {
-
-	char x;
-
-	cin >> x;
-
-	printf("%d", x);
-}
+int main() { char c; cin >> c;cout << int(c);}
