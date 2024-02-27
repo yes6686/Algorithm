@@ -1,115 +1,50 @@
 #include <iostream>
+#include <string.h>
 using namespace std;
+
 int arr[501][501];
 int dp[501][501];
-int m, n;
-void ha() {
-	for (int i = 1; i <= m; i++) {
-		for (int j = 1; j <= n; j++) {
-			{
-				if (i == 1 && j == 1) {
-					dp[i][j] = 1;
-				}
-				else {
-					if (arr[i][j] < arr[i][j - 1]) {
-						if (arr[i][j] < arr[i - 1][j]) {
-							if (arr[i][j] < arr[i][j + 1]) {
-								if (arr[i][j] < arr[i + 1][j]) {
-									dp[i][j] = dp[i][j - 1] + dp[i - 1][j] + dp[i][j + 1] + dp[i + 1][j];
-								}
-								else {
-									dp[i][j] = dp[i][j - 1] + dp[i - 1][j] + dp[i][j + 1];
-								}
-							}
-							else {
-								if (arr[i][j] < arr[i + 1][j]) {
-									dp[i][j] = dp[i][j - 1] + dp[i - 1][j] + dp[i + 1][j];
-								}
-								else {
-									dp[i][j] = dp[i][j - 1] + dp[i - 1][j];
-								}
-							}
 
-						}
-						else {
-							if (arr[i][j] < arr[i][j + 1]) {
-								if (arr[i][j] < arr[i + 1][j]) {
-									dp[i][j] = dp[i][j - 1] + dp[i][j + 1] + dp[i + 1][j];
-								}
-								else {
-									dp[i][j] = dp[i][j - 1] + dp[i][j + 1];
-								}
-							}
-							else {
-								if (arr[i][j] < arr[i + 1][j]) {
-									dp[i][j] = dp[i][j - 1] + dp[i + 1][j];
-								}
-								else {
-									dp[i][j] = dp[i][j - 1];
-								}
-							}
-						}
-					}
-					else {
-						if (arr[i][j] < arr[i - 1][j]) {
-							if (arr[i][j] < arr[i][j + 1]) {
-								if (arr[i][j] < arr[i + 1][j]) {
-									dp[i][j] = dp[i - 1][j] + dp[i][j + 1] + dp[i + 1][j];
-								}
-								else {
-									dp[i][j] = dp[i - 1][j] + dp[i][j + 1];
-								}
-							}
-							else {
-								if (arr[i][j] < arr[i + 1][j]) {
-									dp[i][j] = dp[i - 1][j] + dp[i + 1][j];
-								}
-								else {
-									dp[i][j] = dp[i - 1][j];
-								}
-							}
+int n, m;
 
-						}
-						else {
-							if (arr[i][j] < arr[i][j + 1]) {
-								if (arr[i][j] < arr[i + 1][j]) {
-									dp[i][j] = dp[i][j + 1] + dp[i + 1][j];
-								}
-								else {
-									dp[i][j] = dp[i][j + 1];
-								}
-							}
-							else {
-								if (arr[i][j] < arr[i + 1][j]) {
-									dp[i][j] = dp[i + 1][j];
-								}
-								else {
-									dp[i][j] = 0;
-								}
-							}
-						}
-					}
-				}
-			}
+int dx[4] = { 1,-1,0,0 };
+int dy[4] = { 0,0,1,-1 };
+
+int dfs(int x, int y) {
+	if (dp[x][y]!=-1) return dp[x][y];
+	if (x == n && y == m) return 1;
+
+	for (int i = 0; i < 4; i++) {
+		int nx = x + dx[i];
+		int ny = y + dy[i];
+		if (nx<1 || ny<1 || nx >n || ny>m) continue;
+		if (arr[x][y] <= arr[nx][ny]) continue;
+		if (dp[x][y] == -1) {
+			dp[x][y] = dfs(nx, ny);
+		}
+		else {
+			dp[x][y] += dfs(nx, ny);
 		}
 	}
+	if (dp[x][y] == -1) {
+		return 0;
+	}
+	return dp[x][y];
+
 }
 
-
 int main() {
-	cin >> m >> n;
-	for (int i = 1; i <= m; i++) {
-		for (int j = 1; j <= n; j++) {
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cin >> n >> m;
+	
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= m; j++) {
 			cin >> arr[i][j];
 		}
 	}
+	memset(dp, -1, sizeof(dp));
+	cout<<dfs(1, 1);
 
-	ha();
-	ha();
-	ha();
-	ha();
-    ha();
 
-		cout << dp[m][n];
-	
 }
