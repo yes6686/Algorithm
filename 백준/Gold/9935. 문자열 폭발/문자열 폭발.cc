@@ -8,11 +8,12 @@ stack<char>stk1;
 stack<char>ans;
 
 int main() {
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
 	string s;
 	cin >> s;
 	string b;
 	cin >> b;
-
 	string st = "";
 	for (int i = 0; i < s.size(); i++) {
 		st += s[i];
@@ -34,7 +35,6 @@ int main() {
 				st += stk1.top();
 				stk1.pop();
 			}
-		
 		}
 		else {
 			string ccc = "";
