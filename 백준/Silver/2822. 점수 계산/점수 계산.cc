@@ -2,7 +2,7 @@
 #include <algorithm>
 using namespace std;
 
-int arr[10000];
+int arr[100];
 int arr1[10];
 int result[6];
 int main() {
