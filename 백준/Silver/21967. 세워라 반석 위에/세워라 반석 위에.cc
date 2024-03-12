@@ -6,13 +6,9 @@ using namespace std;
 int arr[11];
 deque<int>dq;
 
-
-
-
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
-
 	int n;
 	cin >> n;
 	int maxAns = 0;
@@ -42,5 +38,4 @@ int main() {
 		}
 	}
 	cout << maxAns;
-	
 }
