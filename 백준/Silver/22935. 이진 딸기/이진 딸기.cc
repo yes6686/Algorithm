@@ -12,15 +12,13 @@ int main() {
 	while (T--) {
 		int n;
 		cin >> n;
-		long long int x = 0;
+		int x = 0;
 		x = (x | n);
 		x--;
 		x %= 28;
 		x++;
 		if (x >= 16) x = 30 - x;
-		for (int i = 8; i >=1; i /= 2) {
-
-
+		for (int i = 8; i >= 1; i /= 2) {
 			if ((x & i) == i) {
 				cout << "딸기";
 
