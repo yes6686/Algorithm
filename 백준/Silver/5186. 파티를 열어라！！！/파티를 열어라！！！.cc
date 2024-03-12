@@ -7,7 +7,7 @@ using namespace std;
 int Darr[501]; // 안취
 int zarr[501]; //취취
 
-priority_queue<int>pq[501];
+priority_queue<int>pq[501]; // 내림차순
 
 int main() {
 	ios::sync_with_stdio(false);
@@ -29,7 +29,6 @@ int main() {
 				zarr[x]++;
 			}
 		}
-		int r = n;
 		for (int i = 0; i < c; i++) {
 			int a, b;
 			cin >> a >> b;
@@ -45,19 +44,15 @@ int main() {
 					b--;
 					if (zarr[a] >= b) {
 						zarr[a] -= b;
-						r -= b;
 					}
 					else if (zarr[a] < b) {
 						int kk = zarr[a];
 						zarr[a] = 0;
-						r -= kk;
 						kk = b - kk;
 						if (Darr[a] >= kk) {
 							Darr[a] -= kk;
-							r -= kk;
 						}
 						else {
-							r -= Darr[a];
 							Darr[a] = 0;
 						}
 					}
@@ -74,5 +69,4 @@ int main() {
 		memset(Darr, 0, sizeof(Darr));
 		memset(zarr, 0, sizeof(zarr));
 	}
-
 }
