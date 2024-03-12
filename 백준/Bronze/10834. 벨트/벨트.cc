@@ -11,8 +11,7 @@ int main() {
 	for (int i = 1; i <= m; i++) {
 		int a, b, s;
 		cin >> a >> b >> s;
-		r *= b;
-		r /= a;
+		r = (r / a) * b;
 		if (s == 1) {
 			d = d == 0 ? 1 : 0;
 		}
