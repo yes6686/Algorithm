@@ -12,9 +12,9 @@ int main() {
 	for (int i = 0; i < n; i++) {
 		cin >> arr[i];
 	}
-	int k = 0;
-	int a = 0;
-	int minAns ;
+	long long int k = 0;
+	long long int a = 0;
+	long long int minAns ;
 	for (int i = 0; i < n; i++) {
 		if (arr[i] % 2 == 1) {
 			k++;
