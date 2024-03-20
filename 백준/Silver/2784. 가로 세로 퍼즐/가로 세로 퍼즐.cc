@@ -7,7 +7,7 @@ string s[6];
 map<string, int>mp;
 int ex = 0;
 
-void dfs(int d,int x,string k) {
+void dfs(int d,string k) {
 	if (ex == 1) return;
 	if (d == 3) {
 		string ch[3];
@@ -51,8 +51,8 @@ void dfs(int d,int x,string k) {
 	}
 
 
-	for (int i = x; i < 6; i++) {
-		dfs(d+1,0, k + s[i] + ",");
+	for (int i = 0; i < 6; i++) {
+		dfs(d+1, k + s[i] + ",");
 	}
 }
 
@@ -65,7 +65,7 @@ int main() {
 	}
 	//sort(s, s + 6);
 		
-	dfs(0,0, "");
+	dfs(0, "");
 
 	if (ex == 0) {
 		cout << 0;
