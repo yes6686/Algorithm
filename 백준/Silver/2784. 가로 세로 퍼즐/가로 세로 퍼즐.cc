@@ -7,7 +7,7 @@ string s[6];
 map<string, int>mp;
 int ex = 0;
 
-void dfs(int d,string k) {
+void dfs(int d, string k) {
 	if (ex == 1) return;
 	if (d == 3) {
 		string ch[3];
@@ -31,11 +31,11 @@ void dfs(int d,string k) {
 			for (int j = 0; j < 3; j++) {
 				cc += ch[j][i];
 			}
-			cmp[cc]++;		
+			cmp[cc]++;
 		}
 		int check = 1;
 		for (int i = 0; i < 6; i++) {
-			if (mp[s[i]]!=cmp[s[i]]) {
+			if (mp[s[i]] != cmp[s[i]]) {
 				check = 0;
 				break;
 			}
@@ -46,13 +46,10 @@ void dfs(int d,string k) {
 				cout << ch[i] << '\n';
 			}
 		}
-		cmp.clear();
 		return;
 	}
-
-
 	for (int i = 0; i < 6; i++) {
-		dfs(d+1, k + s[i] + ",");
+		dfs(d + 1, k + s[i] + ",");
 	}
 }
 
@@ -63,10 +60,7 @@ int main() {
 		cin >> s[i];
 		mp[s[i]]++;
 	}
-	//sort(s, s + 6);
-		
 	dfs(0, "");
-
 	if (ex == 0) {
 		cout << 0;
 	}
