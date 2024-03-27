@@ -10,10 +10,18 @@ int main() {
 	for (int i = 0; i < n; i++) {
 		cin >> arr[i];
 	}
-	long long int ans = arr[n - 1];
+
 	for (int i = n - 2; i >= 0; i--) {
-		if (ans % arr[i] == 0) continue;
-		ans = arr[i] * (ans / arr[i] + 1);
+		if (arr[i + 1] > arr[i]) {
+			long long int k;
+			if (arr[i + 1] % arr[i] == 0) {
+				k = arr[i + 1] / arr[i];
+			}
+			else {
+				k = arr[i + 1] / arr[i] + 1;
+			}
+			arr[i] *= k;
+		}
 	}
-	cout << ans;
+	cout << arr[0];
 }
