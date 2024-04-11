@@ -1,39 +1,70 @@
 #include <iostream>
+#include <algorithm>
+#include <vector>
+
 using namespace std;
 
-int cost[1001];
-int pr[1001];
+// 인덱스, 비용
+vector<pair <int, int>> p;
+int counter[1001];
 
-int vote[1001];
+bool compare(pair<int, int> a, pair<int, int> b) {
+    return a.second > b.second;
+}
 
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
-	int n, m;
-	cin >> n >> m;
-	for (int i = 0; i < n; i++) {
-		cin >> cost[i];
-	}
-	for (int i = 0; i < m; i++) {
-		cin >> pr[i];
-	}
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
 
-	for (int i = 0; i < m; i++) {
-		int v = pr[i];
-		for (int j = 0; j < n; j++) {
-			if (v >= cost[j]) {
-				vote[j+1]++;
-				break;
-			}
-		}
-	}
-	int maxIndex = 0;
-	int ans;
-	for (int i = 0; i < n; i++) {
-		if (maxIndex < vote[i]) {
-			maxIndex = vote[i];
-			ans = i;
-		}
-	}
-	cout << ans;
+    int N, M;
+    cin >> N >> M;
+
+    //값입력
+    int tempValue;
+    for (int i = 0; i < N; i++)
+    {
+        cin >> tempValue;
+        p.push_back(pair<int, int>(i, tempValue));
+    }
+
+    // 정렬
+    sort(p.begin(), p.end(), [](pair<int, int>& left, pair<int, int>& right) {
+        return left.second < right.second;
+        });
+
+    int inputM;
+    int maxIndex = 0;
+    for (int i = 0; i < M; i++)
+    {
+        // 최대 sceond 계산
+        cin >> inputM;
+        for (int j = N - 1; j >= 0; j--)
+        {
+            if (inputM >= p[j].second) {
+                maxIndex = j;
+                break;
+            }
+        }
+
+        // 최소 first 계산
+        for (int j = N - 1; j >= 0; j--)
+        {
+           // if (p[j].second != p[maxIndex].second) break;
+            if (p[maxIndex].first > p[j].first && p[j].second<=inputM)
+            {
+                maxIndex = j;
+            }
+        }
+        counter[p[maxIndex].first]++;
+    }
+
+    // 최대 카운터 계산
+    int result = 0;
+    for (int i = 0; i < N; i++)
+    {
+        if (counter[result] < counter[i]) {
+            result = i;
+        }
+    }
+    cout << ++result << "\n";
 }
