@@ -6,40 +6,31 @@ public class Main {
        int N = scan.nextInt();
        scan.nextLine();
        String channel;
-       Vector<String> vector = new Vector<>();
-       
+   	int kbs1Location=0; // KBS1 위치
+   	int kbs2Location=0; // KBS2 위치
        for(int i = 0; i<N; i++) {
           channel = scan.nextLine();
-          vector.add(channel);
+          if (channel.equals("KBS1")) {
+  			kbs1Location = i;
+  		}
+  		if (channel.equals("KBS2")) {
+  			kbs2Location = i;
+  		}
        }
-          for(int i = 0; i < N; i++) {
-           
-             if(vector.get(i).equals("KBS1")) {
-                vector.remove(i);
-                vector.add(0, "KBS1");
-                for(int j = 0; j<i; j++) {   
-                   System.out.print("4"); 
-                }
-                break;
-                
-             }
-
-             System.out.print("1");
-          }
-          
-          
-          for(int i = 0; i<N; i++) {
-             if(vector.get(i).equals("KBS2")) {
-                vector.remove(i);
-                vector.add(1, "KBS2");
-                for(int j = 0; j<i-1; j++) {
-                   System.out.print("4"); 
-                }
-                break; 
-             }
-             System.out.print("1");
-          } 
-       scan.close();
-   
+       for (int i = 0; i < kbs1Location; i++) {
+   			System.out.print(1);
+   	}
+   	for (int i = 0; i < kbs1Location; i++) {
+			System.out.print(4);
+   	}
+   	if (kbs1Location > kbs2Location) {
+   		kbs2Location += 1;
+   	}
+   	for (int i = 0; i < kbs2Location; i++) {
+			System.out.print(1);
+   	}
+   	for (int i = 0; i < kbs2Location - 1; i++) {
+			System.out.print(4);
+   	}
     }
 }
