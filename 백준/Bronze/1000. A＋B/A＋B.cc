@@ -1,9 +1,12 @@
 #include <iostream>
 using namespace std;
+
+int arr[30000000];
+
 int main() {
-	
-	int A, B;
-	cin >> A >> B;
-	cout << A + B;
-	
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	int a, b;
+	cin >> a >> b;
+	cout << a + b;
 }
