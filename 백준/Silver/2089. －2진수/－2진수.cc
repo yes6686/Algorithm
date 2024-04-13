@@ -11,25 +11,25 @@ void recur(int a) {
 		return;
 	}
 
+	int k = a / (-2);
 	if (a < 0) {
-
-		if (a / (-2) + 1 == 1) {
+		if (k + 1 == 1) {
 			cout << 1;
 			cout << a - (-2);
 			return;
 		}
 		if (a % (-2) == 0) {
-			recur(a / (-2));
-			cout << a - ((-2) * (a / (-2)));
+			recur(k);
+			cout << a - ((-2) * (k));
 		}
 		else {
-			recur(a / (-2) + 1);
-			cout << a - ((-2) * (a / (-2) + 1));
+			recur(k + 1);
+			cout << a - ((-2) * (k + 1));
 		}
 	}
 	else {
-		recur(a / ( - 2));
-		cout << a - ((-2)*(a / (-2)));
+		recur(k);
+		cout << a - ((-2) * (k));
 	}
 }
 
