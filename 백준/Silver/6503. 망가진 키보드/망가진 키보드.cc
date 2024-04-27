@@ -3,13 +3,11 @@
 #include <string.h>
 using namespace std;
 
-int arr[321];
+int arr[127];
 
 int main() {
-    
-    
-    
-    
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
 	
 	while (1) {
 		int n;
