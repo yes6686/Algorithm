@@ -3,7 +3,7 @@
 #include <string.h>
 using namespace std;
 
-int arr[321123];
+int arr[321];
 
 int main() {
     
