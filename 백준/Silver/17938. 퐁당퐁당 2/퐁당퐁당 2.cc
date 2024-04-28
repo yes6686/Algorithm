@@ -1,58 +1,47 @@
 #include <iostream>
 using namespace std;
-
 int main() {
-
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
-		
 	int n;
 	cin >> n;
-	int p, t;
-	cin >> p >> t;
+	int p, T;
+	cin >> p >> T;
 
-	int h = 1;
 	int s = 0;
-	t--;
+	int t = 1;
+	int TT = T - 1;
 	int check = 0;
-	while (t--) {
-		s += h;
-		if(s>n*2)
-			s %= n*2;
+	while (TT--) {
+		s += t;
+		if (s > n * 2)
+			s %= n * 2;
 		if (s == 4 * n) {
 			s = n * 2;
 		}
 		if (check == 0) {
-			h++;
+			t++;
 		}
 		else {
-			h--;
+			t--;
 		}
-		if (h == 2 * n) {
+		if (t == 2 * n) {
 			check = 1;
 		}
-		if (h == 1) {
+		if (t == 1) {
 			check = 0;
 		}
 	}
-	int c = 0;
-	for (int i = s+1; i <= s + h; i++) {
-		int g = i;
-		if (g > 2 * n) {
-			g %= 2 * n;
+	for (int i = 1; i <= t; i++) {
+		int k = s + i;
+		if (k > 2 * n) {
+			k %= 2 * n;
 		}
-		if (g == 4 * n) {
-			g = 2 * n;
+		if (k == 4 * n) {
+			k = 2 * n;
 		}
-		if (p * 2 - 1 == g || p * 2 == g) {
-			c = 1;
-			break;
+		if (k == (2 * p - 1) || k == (2 * p)) {
+			cout << "Dehet YeonJwaJe ^~^" << '\n';
+			return 0;
 		}
 	}
-	if (c == 1) {
-		cout << "Dehet YeonJwaJe ^~^";
-	}
-	else {
-		cout << "Hing...NoJam";
-	}
+	cout << "Hing...NoJam" << '\n';
 }
