@@ -1,22 +1,25 @@
 #include <iostream>
 using namespace std;
-int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
 
-	long long int k, n;
-	cin >> k >> n;
-	if (n == 1) {
-		cout << -1;
-		return 0;
-	}
-	long long int ans = k;
-	while (1) {
-		long long int v = (ans - k) * n;
-		if (v >= ans) {
-			cout << ans;
-			break;
-		}
-		ans++;
-	}
+int main() {
+    long long int k, n;
+    long long int x;
+    cin >> k >> n;
+   long long int i = 1;
+    while (true) {
+        if (n == 1) {
+            x = -1;
+            break;
+        }
+        else if ((i-k)*n>=i) {
+            x = i;
+            break;
+        }
+        else {
+            
+        }
+        i++;
+    }
+    cout << x << endl;
+
 }
