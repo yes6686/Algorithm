@@ -4,7 +4,6 @@
 using namespace std;
 
 int arr[1001];
-
 vector<int>v;
 
 int main() {
@@ -23,9 +22,8 @@ int main() {
 	}
 	sort(arr, arr + n);
 	sort(v.begin(), v.end());
-
 	for (int i = n - 1; i >= 0; i--) {
-		for (int j = 0; j < n; j++) {
+		for (int j = 0; j <= i; j++) {
 			int k = arr[i] - arr[j];
 			bool check=	binary_search(v.begin(), v.end(), k);
 			if (check) {
