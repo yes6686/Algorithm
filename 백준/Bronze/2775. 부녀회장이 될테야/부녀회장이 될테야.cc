@@ -1,30 +1,28 @@
 #include <iostream>
 using namespace std;
-int sum = 0;
-int residents(int k, int n) {
-	
-	if (k == 0) {
-		
-			sum += n;
-		
-	}
-	else {
-		for (int i = 1; i <= n; i++) {
-			residents(k - 1, i);
-		}
-	}
-	return sum;
-}
+
+int arr[15][15];
 
 int main() {
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+
+	for (int i = 1; i <= 14; i++) {
+		arr[0][i] = i;
+	}
+
+	for (int i = 1; i <= 14; i++) {
+		for (int j = 1; j <= 14; j++) {
+			arr[i][j] = arr[i - 1][j] + arr[i][j - 1];
+		}
+	}
 
 	int T;
-	int k, n;
 	cin >> T;
+
 	while (T--) {
+		int k, n;
 		cin >> k >> n;
-		cout<<residents(k, n)<<'\n';
-		sum = 0; 
-		
+		cout << arr[k][n] << '\n';
 	}
 }
