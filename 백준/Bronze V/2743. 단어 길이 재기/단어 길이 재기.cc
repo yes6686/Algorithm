@@ -1,8 +1,7 @@
 #include <iostream>
 using namespace std;
-
 int main(){
-    string s;
-    cin>>s;
-    cout<<s.length();
+    string ss;
+    cin>>ss;
+    cout<<ss.length();
 }
