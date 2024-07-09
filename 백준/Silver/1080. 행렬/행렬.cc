@@ -1,9 +1,11 @@
 #include <iostream>
 using namespace std;
 
-int arr[51][51];
+int arr[501][501];
 
 int main() {
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
 	int n, m;
 	cin >> n >> m;
 	for (int i = 0; i < n; i++) {
