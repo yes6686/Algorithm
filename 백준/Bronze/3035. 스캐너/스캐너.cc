@@ -1,9 +1,9 @@
 #include <iostream>
 using namespace std;
 
-char arr[251][251];
+char arr[51][51];
 
-string str[251];
+string str[51];
 
 int main() {
     ios::sync_with_stdio(false);
