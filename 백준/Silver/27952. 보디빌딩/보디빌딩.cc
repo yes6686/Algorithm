@@ -1,47 +1,26 @@
 #include <iostream>
 using namespace std;
 
-int arr1[500001];
-int arr2[500001];
+long long int arr1[500001];
+long long int arr2[500001];
 
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 
-	int n, x;
+	long long int n, x;
 	cin >> n >> x;
 	for (int i = 0; i < n; i++) {
 		cin >> arr1[i];
 	}
+	long long int sum = 0;
 	for (int i = 0; i < n; i++) {
 		cin >> arr2[i];
-	}
-	int cnt = 0;
-	int w = 0;
-	for (int i = 0; i < n; i++) {
-		w += arr2[i];
-		if (w < arr1[i]) {
-			while (w < arr1[i]) {
-				if (cnt == 0) break;
-				w += x;
-				cnt--;
-			}
-			if (w < arr1[i]) {
-				cout << -1;
-				return 0;
-			}
-		}
-		else {
-			while (true) {
-				if (w - x >= arr1[i]) {
-					cnt++;
-					w -= x;
-				}
-				else {
-					break;
-				}
-			}
+		sum += arr2[i];
+		if (sum < arr1[i]) {
+			cout << -1;
+			return 0;
 		}
 	}
-	cout << cnt;
+	cout << (sum - arr1[n - 1]) / x;
 }
