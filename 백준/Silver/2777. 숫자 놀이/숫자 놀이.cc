@@ -1,9 +1,5 @@
 #include <iostream>
-#include <algorithm>
 using namespace std;
-
-int arrn[100001];
-int arrh[100001];
 
 int main() {
 	ios::sync_with_stdio(false);
