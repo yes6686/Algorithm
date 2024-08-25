@@ -1,29 +1,44 @@
 #include <iostream>
 #include <vector>
-#include <queue>
 using namespace std;
-int c[101];
-int cnt = 0;
-queue<int>q;
+
 vector<int>v[101];
-void DFS(int x) {
-	if (c[x]) return;
-	c[x] = 1;
+int visited[101];
+
+int ans = 0;
+
+void dfs(int x) {
+
 	for (int i = 0; i < v[x].size(); i++) {
 		int k = v[x][i];
-		DFS(k);
+		if (visited[k] == 0) {
+			visited[k] = 1;
+			ans++;
+			dfs(k);
+		}
 	}
-	cnt++;
 }
+
+
 int main() {
-	int n,k;
-	cin >> n>>k;
-	int x,y;
-	for (int i = 1; i <= k; i++) {
-		cin >> x >> y;
-		v[x].push_back(y);
-		v[y].push_back(x);
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+
+	int n;
+	cin >> n;
+	int x;
+	cin >> x;
+	for (int i = 0; i < x; i++) {
+		int a, b;
+		cin >> a >> b;
+		v[a].push_back(b);
+		v[b].push_back(a);
 	}
-	DFS(1);
-	cout << cnt - 1;
+	dfs(1);
+	if (ans == 0) {
+		cout << 0;
+	}
+	else {
+		cout << ans-1 << '\n';
+	}
 }
