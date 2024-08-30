@@ -1,9 +1,9 @@
 #include <iostream>
+#include <string>
 #include <algorithm>
 using namespace std;
 
 string s[301];
-char str[90001];
 
 int main() {
 	ios::sync_with_stdio(false);
@@ -13,16 +13,13 @@ int main() {
 	cin >> n >> m >> k;
 	for (int i = 0; i < n; i++) {
 		cin >> s[i];
+		sort(s[i].begin(), s[i].end());
 	}
 	sort(s, s + n);
 	string ss = "";
 	for (int i = 0; i < k; i++) {
 		ss += s[i];
 	}
-	for (int i = 0; i < ss.size(); i++) {
-		str[i] = ss[i];
-	}
-
-	sort(str, str + ss.size());
-	cout << str;
+	sort(ss.begin(), ss.end());
+	cout << ss;
 }
