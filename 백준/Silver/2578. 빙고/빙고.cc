@@ -27,9 +27,7 @@ int main() {
 	}
 
 	for (int i = 1; i <= 25; i++) {
-		int r = arr[s[i]].first;
-		int c = arr[s[i]].second;
-		
+		auto [r, c] = arr[s[i]]; // 좌표 가져오기
 		wCnt[r]++;
 		vCnt[c]++;
 		if (wCnt[r] == 5) {
