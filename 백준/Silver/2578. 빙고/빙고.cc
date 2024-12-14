@@ -1,11 +1,13 @@
 #include <iostream>
 using namespace std;
 
-int arr[6][6];
-pair<int, int> arrc[26];
+pair<int, int> arr[26];
 int s[26];
-int b[6][6];
-int cnt = 0;
+int totalCnt = 0;
+
+int wCnt[6]; // 가로 카운트
+int vCnt[6]; // 세로 카운트
+int dCnt[3]; // 대각선 카운트
 
 int main() {
 	ios::sync_with_stdio(false);
@@ -13,9 +15,10 @@ int main() {
 
 	for (int i = 1; i <= 5; i++) {
 		for (int j = 1; j <= 5; j++) {
-			cin >> arr[i][j];
-			arrc[arr[i][j]].first = i;
-			arrc[arr[i][j]].second = j;
+			int x;
+			cin >> x;
+			arr[x].first = i;
+			arr[x].second = j;
 
 		}
 	}
@@ -24,64 +27,40 @@ int main() {
 	}
 
 	for (int i = 1; i <= 25; i++) {
-		int r = arrc[s[i]].first;
-		int c = arrc[s[i]].second;
-		b[r][c] = 1;
-		// 가로검사
-		int check = 1;
-		for (int j = 1; j <= 5; j++) {
-			if (b[r][j] == 0) {
-				check = 0;
-				break;
-			}
-		}
-		if (check == 1) {
-			cnt++;
-			if (cnt >= 3) {
+		int r = arr[s[i]].first;
+		int c = arr[s[i]].second;
+		
+		wCnt[r]++;
+		vCnt[c]++;
+		if (wCnt[r] == 5) {
+			totalCnt++;
+			if (totalCnt >= 3) {
 				cout << i << '\n';
 				return 0;
 			}
 		}
-		check = 1;
-		// 세로 검사
-		for (int j = 1; j <= 5; j++) {
-			if (b[j][c] == 0) {
-				check = 0;
-			}
-		}
-		if (check == 1) {
-			cnt++;
-			if (cnt >= 3) {
+		if (vCnt[c] == 5) {
+			totalCnt++;
+			if (totalCnt >= 3) {
 				cout << i << '\n';
 				return 0;
 			}
 		}
-		// 대각선 검사
 		if (r == c) {
-			check = 1;
-			for (int j = 1; j <= 5; j++) {
-				if (b[j][j] == 0) {
-					check = 0;
-				}
-			}
-			if (check == 1) {
-				cnt++;
-				if (cnt >= 3) {
+			dCnt[1]++;
+			if (dCnt[1] == 5) {
+				totalCnt++;
+				if (totalCnt >= 3) {
 					cout << i << '\n';
 					return 0;
 				}
 			}
 		}
 		if (r == 6 - c) {
-			check = 1;
-			for (int j = 1; j <= 5; j++) {
-				if (b[j][6 - j] == 0) {
-					check = 0;
-				}
-			}
-			if (check == 1) {
-				cnt++;
-				if (cnt >= 3) {
+			dCnt[2]++;
+			if (dCnt[2] == 5) {
+				totalCnt++;
+				if (totalCnt >= 3) {
 					cout << i << '\n';
 					return 0;
 				}
