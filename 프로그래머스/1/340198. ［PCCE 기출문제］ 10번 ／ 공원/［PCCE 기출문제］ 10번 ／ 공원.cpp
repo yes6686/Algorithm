@@ -6,49 +6,39 @@
 using namespace std;
 
 int arr[51][51];
-
-bool compare(int a, int b){
-    return a>b;
-}
+int dp[51][51];
 
 int solution(vector<int> mats, vector<vector<string>> park) {
-    sort(mats.begin(), mats.end(), compare);
-    
     int rows = park.size();
     int cols = park[0].size();
-    cout<<rows<<" , "<<cols<<'\n';
-    
     for(int i=0;i<rows;i++){
         for(int j=0;j<cols;j++){
             if(park[i][j]=="-1"){
-                arr[i][j] = 0;
-            }else{
                 arr[i][j]=1;
-            }
-            cout<<arr[i][j]<<' ';
-        }
-        cout<<'\n';
-    }
-    
-    
-    for(int k : mats){
-        for(int a=0;a<=rows-k;a++){
-            for(int b=0;b<=cols-k;b++){
-                int check=1;
-                for(int h=a;h<a+k && check==1;h++){
-                    for(int f=b;f<b+k;f++){
-                        if(arr[h][f]==1){
-                            check=0;
-                            break;
-                        }
-                    }
-                }
-                if(check==1){
-                    return k;
-                }
+            }else{
+                arr[i][j]=0;
             }
         }
     }
+    int maxAns = -1;
+    for(int i=0;i<rows;i++){
+        for(int j=0;j<cols;j++){
+            if(i==0 || j==0 || arr[i][j]==0) continue;
+            arr[i][j] = min({arr[i-1][j],arr[i][j-1],arr[i-1][j-1]})+1;
+            maxAns = max(maxAns,arr[i][j]);
+        }    
+    }
+    int answer = -1;
+
+    sort(mats.rbegin(),mats.rend());
     
-    return -1;
+    for(int mat : mats){
+        if(mat <= maxAns){
+            answer = mat;
+            break;
+        }
+    }
+    
+    return answer;
+    
 }
