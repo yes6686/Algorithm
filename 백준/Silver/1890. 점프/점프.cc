@@ -1,11 +1,11 @@
 #include <iostream>
 using namespace std;
 
-long long int arr[101][101];
+int arr[101][101];
 long long int dp[101][101];
 
-long long int dx[2] = { 1,0 };
-long long int dy[2] = { 0,1 };
+int dx[2] = { 1,0 };
+int dy[2] = { 0,1 };
 
 int main() {
 	ios::sync_with_stdio(false);
