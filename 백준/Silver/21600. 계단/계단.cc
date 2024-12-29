@@ -21,9 +21,10 @@ int main() {
     int maxLength = 1;
 
     for (int i = 1; i < n; i++) {
-        if (arr[i] >= dp[i - 1]) {
+        if (arr[i] > dp[i - 1]) {
             dp[i] = dp[i - 1] + 1;
-        } else {
+        }
+        else {
             dp[i] = arr[i];
         }
         maxLength = max(maxLength, dp[i]);
