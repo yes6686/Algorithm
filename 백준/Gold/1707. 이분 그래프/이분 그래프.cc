@@ -1,61 +1,65 @@
 #include <iostream>
 #include <vector>
-#include <cstring>
 using namespace std;
 
-vector<int> v[20001];
-int visited[20001];
-bool isBipartite;
+int v, e;
+vector<int> vec[20001];
+int graph[20001];
+string ans;
 
-void dfs(int node, int color) {
-    visited[node] = color;
-    for (int next : v[node]) {
-        if (visited[next] == 0) {
-            dfs(next, 3 - color);
-        } else if (visited[next] == color) {
-            isBipartite = false;
+bool dfs(int s) {
+    for (int neighbor : vec[s]) {
+        if (graph[neighbor] == 0) {  // 미방문 노드
+            graph[neighbor] = 3 - graph[s];  // 1 -> 2, 2 -> 1
+            if (!dfs(neighbor)) return false;
+        } else if (graph[neighbor] == graph[s]) {  // 같은 그룹에 속하면 이분 그래프 아님
+            return false;
         }
     }
+    return true;
+}
+
+void solve() {
+    for (int i = 1; i <= v; i++) {
+        if (graph[i] == 0) {  // 방문하지 않은 컴포넌트만 탐색
+            graph[i] = 1;  // 시작 노드 그룹 설정
+            if (!dfs(i)) {
+                ans = "NO";
+                return;
+            }
+        }
+    }
+    ans = "YES";
 }
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int T;
-    cin >> T;
-    while (T--) {
-        int V, E;
-        cin >> V >> E;
+    int t;
+    cin >> t;
 
-        // 그래프 초기화
-        for (int i = 1; i <= V; i++) {
-            v[i].clear();
-            visited[i] = 0;
+    while (t--) {
+        cin >> v >> e;
+
+        // 초기화
+        for (int i = 1; i <= v; i++) {
+            vec[i].clear();
+            graph[i] = 0;
         }
 
-        // 간선 입력
-        for (int i = 0; i < E; i++) {
+        // 그래프 입력
+        for (int i = 0; i < e; i++) {
             int a, b;
             cin >> a >> b;
-            v[a].push_back(b);
-            v[b].push_back(a);
+            vec[a].push_back(b);
+            vec[b].push_back(a);
         }
 
-        isBipartite = true;
+        // 이분 그래프 판별
+        solve();
 
-        // 모든 정점에 대해 DFS 수행
-        for (int i = 1; i <= V; i++) {
-            if (visited[i] == 0 && isBipartite) {
-                dfs(i, 1);
-            }
-        }
-
-        if (isBipartite) {
-            cout << "YES\n";
-        } else {
-            cout << "NO\n";
-        }
+        cout << ans << '\n';
     }
     return 0;
 }
