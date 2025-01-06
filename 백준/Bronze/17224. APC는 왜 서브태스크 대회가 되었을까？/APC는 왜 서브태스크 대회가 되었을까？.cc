@@ -17,6 +17,7 @@ int main() {
 	}
 	sort(arr, arr + n);
 	for (int i = 0; i < n; i++) {
+		if (cnt >= k) break;
 		if (arr[i].first <= l) {
 			sum += 140;
 			cnt++;
@@ -25,7 +26,6 @@ int main() {
 			sum += 100;
 			cnt++;
 		}
-		if (cnt >= k) break;
 	}
 	cout << sum << '\n';
 }
