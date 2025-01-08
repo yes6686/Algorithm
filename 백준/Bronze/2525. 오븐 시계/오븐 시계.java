@@ -1,23 +1,24 @@
+
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner= new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in); // 입력을 받기 위한 Scanner 객체 생성
 
-        int h = scanner.nextInt();
-        int m = scanner.nextInt();
-        int t = scanner.nextInt();
+        int h = scanner.nextInt(); // 현재 시(hour)
+        int m = scanner.nextInt(); // 현재 분(minute)
+        int t = scanner.nextInt(); // 추가할 조리 시간(분)
 
-        if(m+t>=60){
-            h+=(m+t)/60;
-            m=(m+t)%60;
-            if(h>=24){
-                h-=24;
-            }
-        }else{
-            m+=t;
+        // 총 분 계산
+        m += t; 
+        h += m / 60; // 분을 시간으로 변환
+        m %= 60; // 남은 분
+
+        // 24시간 초과 시 조정
+        if (h >= 24) {
+            h -= 24;
         }
 
-        System.out.println(h+" "+m);
+        System.out.println(h + " " + m); // 결과 출력
     }
 }
