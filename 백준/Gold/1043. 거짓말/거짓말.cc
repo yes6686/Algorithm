@@ -25,6 +25,7 @@ int main() {
 			arr[i][j] = k;
 		}
 	}
+
 	while (1) {
 		int cnt = 0;
 		for (int i = 0; i < m; i++) {
