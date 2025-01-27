@@ -1,55 +1,63 @@
 #include <iostream>
-#include <queue>
+#include <algorithm>
+#include <vector>
 using namespace std;
 
-priority_queue<pair<int, pair<int, int>>, 
-	vector<pair<int, pair<int, int>>>, 
-	greater<pair<int, pair<int, int>>>>pq;
+vector<pair<int,pair<int,int>>>v;
 
 int parent[10001];
 
-int getParent(int x) {
-	if (parent[x] == x) return x;
-	return getParent(parent[x]);
+int getParent(int n) {
+
+	if (parent[n] == n) {
+		return n;
+	}
+	else {
+		return parent[n] = getParent(parent[n]);
+	}
 }
 
 void unionParent(int a, int b) {
 	a = getParent(a);
 	b = getParent(b);
-	if (a < b) parent[b] = a;
-	else parent[a] = b;
+	if (a < b) {
+		parent[b] = a;
+	}
+	else {
+		parent[a] = b;
+	}
 }
 
 int findParent(int a, int b) {
-	a = getParent(a);
-	b = getParent(b);
-	if (a == b) return 1;
-	else return 0;
+	return getParent(a) == getParent(b);
 }
 
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
+
 	int V, E;
 	cin >> V >> E;
-	int A, B, C;
 
-	for (int i = 1; i <= V; i++) parent[i] = i;
-	
-	for (int i = 0; i < E; i++) {
-		cin >> A >> B >> C;
-		pq.push({ C,{A,B} });
+	for (int i = 1; i <= V; i++) {
+		parent[i] = i;
 	}
+
+	for (int i = 0; i < E; i++) {
+		int a, b, c;
+		cin >> a >> b >> c;
+		v.push_back({ c,{a,b} });
+		v.push_back({ c,{b,a} });
+	}
+	sort(v.begin(), v.end());
 	int ans = 0;
-	while (!pq.empty()) {
-		int cost = pq.top().first;
-		int a = pq.top().second.first;
-		int b = pq.top().second.second;
-		pq.pop();
-		if (!findParent(a, b)) {
-			unionParent(a, b);
-			ans += cost;
+	for (int i = 0; i < v.size(); i++) {
+		int x = v[i].second.first;
+		int y = v[i].second.second;
+		if (!findParent(x, y)) {
+			unionParent(x, y);
+			ans += v[i].first;
 		}
 	}
-	cout << ans;
+	cout << ans << '\n';	
 }
