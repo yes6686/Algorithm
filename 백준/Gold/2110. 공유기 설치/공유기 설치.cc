@@ -29,7 +29,7 @@ int main() {
 		}
 		if (cnt >= k-1) {
 			s = m + 1;
-			ans = max(ans, m);
+			ans = m;
 		}
 		else {
 			e = m - 1;
