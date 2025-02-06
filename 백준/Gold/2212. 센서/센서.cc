@@ -1,54 +1,47 @@
+
 #include <iostream>
 #include <algorithm>
 #include <vector>
-#include <set>
 using namespace std;
 
 int arr[10001];
 
-set<int>st;
-vector<pair<int,int>>v;
-vector < pair<int, int>>vt;
-int check[10001];
-
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
 
-	int n;
-	cin >> n;
-	int k;
-	cin >> k;
+    int n, k;
+    cin >> n >> k;
 
-	for (int i = 0; i < n; i++) {
-		cin >> arr[i];
-		st.insert(arr[i]);
-	}
-	if (n <= k) {
-		cout << 0 << '\n';
-		return 0;
-	}
+    // 센서 입력
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
 
-	set<int>::iterator iter;
-	int s = 0;
-	for (iter = st.begin(); iter != st.end(); iter++) {
-		arr[s++] = *iter;
-	}
-	for (int i = 0; i < s-1; i++) {
-		vt.push_back({ arr[i + 1] - arr[i],i });
-	}
+    // 센서가 k개 이상이면 모든 센서에 기지국을 두어야 하므로 거리합은 0
+    if (n <= k) {
+        cout << 0 << '\n';
+        return 0;
+    }
 
-	sort(vt.rbegin(), vt.rend());
+    // 센서 위치 정렬
+    sort(arr, arr + n);
 
-	for (int i = 0; i < k - 1; i++) {
-		check[vt[i].second] = 1;
-	}
-	int ans = 0;
-	for (int i = 0; i < s-1; i++) {
-		if (check[i] == 0) {
-			ans += arr[i+1]-arr[i];
-		}
-	}
-	cout << ans<<'\n';
+    // 센서 간 거리 차이 계산
+    vector<int> gaps;
+    for (int i = 0; i < n - 1; i++) {
+        gaps.push_back(arr[i + 1] - arr[i]);
+    }
 
+    // 거리 차이 내림차순 정렬
+    sort(gaps.rbegin(), gaps.rend());
+
+    // 가장 긴 k-1개의 구간을 없애고 나머지 합산
+    int ans = 0;
+    for (int i = k - 1; i < gaps.size(); i++) {
+        ans += gaps[i];
+    }
+
+    cout << ans << '\n';
+    return 0;
 }
