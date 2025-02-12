@@ -1,8 +1,9 @@
 #include <iostream>
+#include <queue>
 using namespace std;
 
-int arr[1001];
-int larr[1001];
+queue<int>q1;
+queue<int>q2;
 
 int main() {
 	ios::sync_with_stdio(false);
@@ -11,38 +12,29 @@ int main() {
 	int n, w, l;
 	cin >> n >> w >> l;
 	for (int i = 0; i < n; i++) {
-		cin >> arr[i];
+		int x;
+		cin >> x;
+		q1.push(x);
 	}
-	int t = 0;
-	int s = 0;
-
-	while (true) {
-		int sum = 0;
-		int currLengthW = 0; // 현재 다리 위에 차 무게의 합 
-		for (int i = s; i < n; i++) {
-			if (currLengthW + arr[i] > l) {
-				break;
-			}
-			currLengthW += arr[i];
-			if (i == s) {
-				larr[i]++;
-			}
-			else {
-				if (larr[i - 1] - larr[i] >= 2) {
-					larr[i]++;
-				}
-				else {
-					break;
-				}
-			}
-			if (larr[i] > w) {
-				s++;
-				currLengthW -= arr[i];
-			}
+	int currW = 0;
+	int ansT = 0;
+	while (!q1.empty()) {
+		int x = q1.front();
+		if (q2.size() == w) {
+			currW -= q2.front();
+			q2.pop();
 		}
-		t++;
-		if (s == n) break;
 
+		if (currW + x <= l) {
+			currW += x;
+			q1.pop();
+			q2.push(x);
+			ansT++;
+		}
+		else {
+			ansT++;
+			q2.push(0);
+		}
 	}
-	cout << t << '\n';
+	cout << ansT + w;
 }
