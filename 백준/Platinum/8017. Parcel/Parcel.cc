@@ -2,9 +2,7 @@
 #include <stack>
 using namespace std;
 
-
 int arrR[2001][2001];
-int arrC[2001][2001];
 int arr[2001][2001];
 
 stack<pair<int,int>>st;
@@ -12,8 +10,6 @@ stack<pair<int,int>>st;
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
-
-
 	int n;
 	cin >> n;
 	for (int i = 0; i < n; i++) {
@@ -24,25 +20,12 @@ int main() {
 					arrR[i][j] = 1;
 				}
 			}
-			if (j == 0) {
-				if (arr[i][j] == 0) {
-					arrC[i][j] = 1;
-				}
-			}
 		}
 	}
 	for (int i = 0; i < n; i++) {
 		for (int j = 1; j < n; j++) {
 			if (arr[j][i] == 0) {
 				arrR[j][i] = arrR[j - 1][i] + 1;
-			}
-		}
-	}
-
-	for (int i = 0; i < n; i++) {
-		for (int j = 1; j < n; j++) {
-			if (arr[i][j] == 0) {
-				arrC[i][j] = arrC[i][j - 1] + 1;
 			}
 		}
 	}
@@ -83,7 +66,5 @@ int main() {
 			}
 		}
 	}
-	cout << ans << '\n';
-	
-	
+	cout << ans << '\n';	
 }
