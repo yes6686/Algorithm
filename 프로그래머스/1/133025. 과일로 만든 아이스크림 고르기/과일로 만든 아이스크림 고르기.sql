@@ -1,4 +1,2 @@
 -- 코드를 입력하세요
-SELECT f.FLAVOR
-from FIRST_HALF f JOIN ICECREAM_INFO i ON f.FLAVOR = i.FLAVOR
-where f.TOTAL_ORDER > 3000 and i.INGREDIENT_TYPE = 'fruit_based'
+SELECT
