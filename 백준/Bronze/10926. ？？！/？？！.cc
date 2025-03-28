@@ -1,11 +1,10 @@
-#include <iostream>
-using namespace std;
+#include <stdio.h>
 
-int main() { 
-
-	string s;
-	cin >> s;
-
-	cout << s << "??!" << endl;
-
+int main() {
+	char joonas[50];
+	scanf("%s", joonas);
+	printf("%s??!", joonas);
+ 
+	
+	return 0;
 }
