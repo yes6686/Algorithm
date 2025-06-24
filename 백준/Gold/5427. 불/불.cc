@@ -86,7 +86,6 @@ int main() {
 		}
 
 		minAns = 1000001;
-		while (!q.empty()) q.pop();
 		memset(arr, 0, sizeof(arr));
 		memset(fire, 0, sizeof(fire));
 		memset(visited, 0, sizeof(visited));
