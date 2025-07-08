@@ -7,13 +7,15 @@ int main() {
 
 	string s;
 	cin >> s;
-	int cnt = 0;
-	for (int i = 1; i <= s.size(); i++) {
-		if (s[i-1] == 'N') continue;
-		cnt++;
-		for (int j = i; j <= s.size(); j+=i) {
-			(s[j - 1] == 'N') ? (s[j-1] = 'Y') : (s[j - 1] = 'N');
+
+	int ans = 0;
+	for (int i = 0;i < s.size();i++) {
+		if (s[i] == 'Y') {
+			ans++;
+			for (int j = i;j < s.size();j += (i + 1)) {
+				s[j] = (s[j] == 'Y') ? 'N' : 'Y';
+			}
 		}
 	}
-	cout << cnt;
+	cout << ans << '\n';
 }
