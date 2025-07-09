@@ -1,35 +1,26 @@
 #include <iostream>
-
 using namespace std;
+
 int main() {
-	int x=0, y=0;
-	int n;
-	scanf("%d", &n);
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+
+	int x;
+	cin >> x;
+
 	int cnt = 0;
-	for (int i = 1; i <= n; i++) {
-		if (cnt == n) {
-			break;
-		}
-		for (int j = 1; j <= i; j++) {
+	for (int i = 1;i <= x;i++) {
+		for (int j = 1;j <= i;j++) {
 			cnt++;
-			int x = j; 
-			int y = i + 1 - j;
-		
-			
-			if (cnt == n) {
+			if (cnt == x) {
 				if (i % 2 == 0) {
-					printf("%d/%d", x, y);
-					
+					cout << j << "/" << i - j + 1 << '\n';
 				}
-			else {
-					printf("%d/%d", y, x);
-					
-
-			}
-				break;
+				else {
+					cout << i - j + 1 << "/" << j << '\n';
+				}
+				return 0;
 			}
 		}
-
 	}
-	
 }
