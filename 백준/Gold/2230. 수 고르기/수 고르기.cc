@@ -8,18 +8,26 @@ int main() {
 	int n, m;
 	cin >> n >> m;
 
-	for (int i = 0;i < n;i++) {
+	for (int i = 0; i < n; i++) {
 		cin >> arr[i];
 	}
 
 	sort(arr, arr + n);
 
-	int minAns = arr[n - 1] - arr[0];
-	for (int i = 0;i < n - 1;i++) {
-		int target = m + arr[i];
-		int idx = lower_bound(arr + (i + 1), arr + n, target) - arr;
-		if (idx >= n) continue;
-		minAns = min(minAns, arr[idx] - arr[i]);
+	int ans = 2e9;  // 최대값으로 초기화
+	int left = 0, right = 0;
+
+	while (right < n) {
+		int diff = arr[right] - arr[left];
+
+		if (diff >= m) {
+			ans = min(ans, diff);
+			left++;
+		}
+		else {
+			right++;
+		}
 	}
-	cout << minAns;
+
+	cout << ans;
 }
