@@ -1,0 +1,26 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+vector<vector<int>> solution(vector<vector<int>> arr1, vector<vector<int>> arr2) {
+    vector<vector<int>> answer;
+    
+    int r = arr1.size();
+    int c = arr2[0].size();
+    int k = arr2.size();
+    
+    for(int i=0;i<r;i++){
+        vector<int>arr;
+        for(int t=0;t<c;t++){
+            int sum=0;
+            for(int j=0;j<k;j++){
+                sum += (arr1[i][j] * arr2[j][t]);
+            }
+            arr.push_back(sum);
+        }
+        answer.push_back(arr);
+    }
+    
+    return answer;
+}
