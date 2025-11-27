@@ -55,7 +55,7 @@ int solution(vector<vector<int>> points, vector<vector<int>> routes) {
             }
         }
         
-     for(int t=0;t<20001;t++){
+     for(int t=0;t<=11001;t++){
         for(int r=1;r<=100;r++){
             for(int c=1;c<=100;c++){
                 if(visited[r][c][t] >= 2){
