@@ -4,13 +4,14 @@ using namespace std;
 
 queue<pair<int,int>>q;
 int arr[101][101];
-int visited[101][101];
 int dx[4]={0,0,1,-1};
 int dy[4]={1,-1,0,0};
 int answer = -1;
 int n=0,m=0;
 
 void bfs(){
+    int visited[101][101] ={0};
+    visited[0][0]=1;
     while(!q.empty()){
         int kx = q.front().first;
         int ky = q.front().second;
@@ -41,7 +42,6 @@ int solution(vector<vector<int> > maps)
     }
     
     q.push({0,0});
-    visited[0][0]=1;
     bfs();
     
     return answer;
