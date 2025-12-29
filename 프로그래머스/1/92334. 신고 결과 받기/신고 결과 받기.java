@@ -5,7 +5,7 @@ class Solution {
         
         HashMap<String, Integer> hm = new HashMap<>();
         HashSet<String> hs = new HashSet<>();
-        Set<String> list = new HashSet<>();
+        HashSet<String> list = new HashSet<>();
         
         for(int i=0;i<report.length;i++){
             String[] parts = report[i].split(" ");
