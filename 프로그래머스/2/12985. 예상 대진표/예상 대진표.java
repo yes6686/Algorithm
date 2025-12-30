@@ -10,10 +10,9 @@ class Solution
         
         for(int i=0;i<n;i++) arr[i] = i+1;
         
-        // 1 2 3 4 5 6 7 8
-        // 0 1 2 3 4 5 6 7
+        // 0 1 2 3 4 5 6 7 8
         
-        while(true){
+        while(n>1){
             
             int check=0;
             for(int i=0;i<n;i+=2){
