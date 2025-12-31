@@ -14,12 +14,12 @@ class Solution {
     
     private static final int[] dx = {1,-1,0,0};
     private static final int[] dy = {0,0,1,-1};
-    private static boolean[][] visited;
+    //private static boolean[][] visited;
     
     private static int bfs(int x, int y, int n, int m, String[] maps, int check){
         Queue<Node> queue = new ArrayDeque<>();
         queue.add(new Node(x,y,0));
-        visited = new boolean[n][m];
+        boolean[][] visited = new boolean[n][m];
         visited[x][y]= true;
         while(!queue.isEmpty()){
             Node curr = queue.poll();
@@ -33,7 +33,7 @@ class Solution {
                 if(w=='X') continue;
                 visited[nx][ny] =true;
                 if((check==1 && w=='L') || (check==2 && w=='E')){
-                    queue.clear();
+                    //queue.clear();
                     return nc;
                 }else{
                     queue.add(new Node(nx,ny,nc));
