@@ -2,16 +2,18 @@ import java.util.*;
 
 class Solution {
     public long solution(long n) {
-        long answer = 0;
-        
-        String[] numbers = String.valueOf(n).split("");
-        Arrays.sort(numbers, Collections.reverseOrder());
-        
-        StringBuilder sb = new StringBuilder();
-        for(String num : numbers){
-            sb.append(num);
+        char[] chars = String.valueOf(n).toCharArray();
+
+        Arrays.sort(chars);
+
+        for(int i=0;i<chars.length/2;i++){
+            char temp = chars[i];
+            chars[i] = chars[chars.length - 1 - i];
+            chars[chars.length - 1 -i] = temp;
         }
+
+        String result = new String(chars);
         
-        return Long.parseLong(sb.toString());
+        return Long.parseLong(result);
     }
 }
