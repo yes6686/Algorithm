@@ -25,8 +25,9 @@ public class Main {
 
             for(int j=0;j<n;j++){
                 int x = sc.nextInt();
-                queue.add(new Node(x,j));
-                pq.add(new Node(x,j));
+                Node node = new Node(x,j);
+                queue.add(node);
+                pq.add(node);
             }
 
             int cnt = 1;
